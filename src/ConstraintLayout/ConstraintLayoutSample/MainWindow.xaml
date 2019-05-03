@@ -5,14 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConstraintLayoutSample"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        FontSize="20">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Canvas>
-            <Button Content="top-left" Canvas.Top="10" Canvas.Left="10"/>
-            <Button Content="top-right" Canvas.Top="10" Canvas.Right="10" />
-            <Button Content="bottom-left" Canvas.Bottom="10" Canvas.Left="10" />
-            <Button Content="bottom-right" Canvas.Bottom="10" Canvas.Right="10"/>
-        </Canvas>
+        <local:Sample1/>
     </Grid>
 </Window>
