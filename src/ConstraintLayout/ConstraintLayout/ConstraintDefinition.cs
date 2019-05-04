@@ -36,18 +36,23 @@ namespace ConstraintLayout
             typeof(SimpleConstraint), 
             new PropertyMetadata(default(ConstraintProperty)));
 
-        public static readonly DependencyProperty ConstantProperty = DependencyProperty.Register(
-            "Constant",
+        public static readonly DependencyProperty Constant1Property = DependencyProperty.Register(
+            "Constant1",
             typeof(double),
             typeof(SimpleConstraint),
-            new PropertyMetadata(0.0, ConstantPropertyChangedCallback));
+            new PropertyMetadata(0.0));
+
+        public static readonly DependencyProperty Constant2Property = DependencyProperty.Register(
+            "Constant2",
+            typeof(double),
+            typeof(SimpleConstraint),
+            new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty RelationProperty = DependencyProperty.Register(
             "Relation", 
             typeof(ConstraintRelation), 
             typeof(SimpleConstraint), 
             new PropertyMetadata(ConstraintRelation.Equal));
-
 
 
         public UIElement Element1
@@ -74,10 +79,16 @@ namespace ConstraintLayout
             set => SetValue(Property2Property, value);
         }
 
-        public double Constant
+        public double Constant1
         {
-            get => (double)GetValue(ConstantProperty);
-            set => SetValue(ConstantProperty, value);
+            get => (double)GetValue(Constant1Property);
+            set => SetValue(Constant1Property, value);
+        }
+
+        public double Constant2
+        {
+            get => (double)GetValue(Constant2Property);
+            set => SetValue(Constant2Property, value);
         }
 
         public ConstraintRelation Relation
@@ -108,7 +119,7 @@ namespace ConstraintLayout
             var var2 = vars2[Property2];
             if (ReferenceEquals(var1, null) || ReferenceEquals(var2, null)) return;
 
-            solver.AddConstraint(new Constraint(var1 - var2 + Constant, GetRelationalOperator(Relation)));
+            solver.AddConstraint(new Constraint(var1 + Constant1 - var2 - Constant2, GetRelationalOperator(Relation)));
         }
 
         private RelationalOperator GetRelationalOperator(ConstraintRelation relation)

@@ -6,9 +6,21 @@ using Kiwi;
 
 namespace ConstraintLayout
 {
-
     public class ConstraintCanvas : Canvas
     {
+        public static readonly DependencyProperty UseCanvasLayoutProperty = DependencyProperty.Register(
+            "UseCanvasLayout",
+            typeof(bool),
+            typeof(ConstraintCanvas),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        private static readonly DependencyPropertyKey ConstraintDefinitionsPropertyKey = DependencyProperty.RegisterReadOnly(
+            "ConstraintDefinitions", 
+            typeof(ConstraintDefinitionCollection), 
+            typeof(ConstraintCanvas), 
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsArrange));
+        public static readonly DependencyProperty ConstraintDefinitionsProperty = ConstraintDefinitionsPropertyKey.DependencyProperty;
+
         private static readonly DependencyPropertyKey ElementVarsPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
             "ElementVars", 
             typeof(ElementVars), 
@@ -16,22 +28,16 @@ namespace ConstraintLayout
             new PropertyMetadata(default(ElementVars)));
         internal static readonly DependencyProperty ElementVarsProperty = ElementVarsPropertyKey.DependencyProperty;
 
-        public static readonly DependencyProperty UseCanvasLayoutProperty = DependencyProperty.Register(
-            "UseCanvasLayout",
-            typeof(bool),
-            typeof(ConstraintCanvas),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange));
 
         private int _childIdCounter;
 
 
         public ConstraintCanvas()
         {
-            ConstraintDefinitions = new FreezableCollection<ConstraintDefinition>();
+            SetValue(ConstraintDefinitionsPropertyKey, new ConstraintDefinitionCollection());
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public IList ConstraintDefinitions { get; }
+        #region Properties
 
         public bool UseCanvasLayout
         {
@@ -39,10 +45,24 @@ namespace ConstraintLayout
             set => SetValue(UseCanvasLayoutProperty, value);
         }
 
-        internal static ElementVars GetElementVars(DependencyObject element) => (ElementVars)element.GetValue(ElementVarsProperty);
-        private static void SetElementVars(DependencyObject element, ElementVars value) => element.SetValue(ElementVarsProperty, value);
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public IList ConstraintDefinitions
+        {
+            get => (IList)GetValue(ConstraintDefinitionsProperty);
+        }
 
-        
+        internal static ElementVars GetElementVars(DependencyObject element)
+        {
+            return (ElementVars) element.GetValue(ElementVarsProperty);
+        }
+
+        private static void SetElementVars(DependencyObject element, ElementVars value)
+        {
+            element.SetValue(ElementVarsProperty, value);
+        }
+
+        #endregion
+
         #region Logical/Visual Tree
 
         internal new void AddLogicalChild(object child)
@@ -54,7 +74,6 @@ namespace ConstraintLayout
         {
             base.RemoveLogicalChild(child);
         }
-
 
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
         {
@@ -203,7 +222,9 @@ namespace ConstraintLayout
             {
                 double bottom = GetBottom(child);
                 if (!double.IsNaN(bottom))
+                {
                     y = arrangeSize.Height - child.DesiredSize.Height - bottom;
+                }
             }
 
             child.Arrange(new Rect(new Point(x, y), child.DesiredSize));

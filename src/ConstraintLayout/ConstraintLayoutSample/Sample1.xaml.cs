@@ -25,4 +25,20 @@ namespace ConstraintLayoutSample
             InitializeComponent();
         }
     }
+
+    public class Sample1ViewModel : NotifyPropertyChangedBase
+    {
+        private int _spacing = 10;
+
+        public int Spacing
+        {
+            get => _spacing;
+            set
+            {
+                if (value == _spacing) return;
+                _spacing = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 }

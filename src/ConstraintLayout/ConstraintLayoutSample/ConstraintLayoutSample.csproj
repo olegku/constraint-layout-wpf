@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NotifyPropertyChangedBase.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Sample1.xaml.cs">
       <DependentUpon>Sample1.xaml</DependentUpon>
     </Compile>

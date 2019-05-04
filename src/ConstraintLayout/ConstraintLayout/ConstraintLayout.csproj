@@ -59,6 +59,7 @@
     <Compile Include="ConstraintDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstraintDefinitionCollection.cs" />
     <Compile Include="ElementVars.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
