@@ -14,4 +14,15 @@ namespace ConstraintLayoutSample
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
+    public class SampleVmBase : NotifyPropertyChangedBase
+    {
+        public SampleVmBase(string displayName)
+        {
+            DisplayName = displayName;
+        }
+
+        [Browsable(false)]
+        public string DisplayName { get; }
+    }
 }

@@ -5,49 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConstraintLayoutSample"
              xmlns:cl="clr-namespace:ConstraintLayout;assembly=ConstraintLayout"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance {x:Type local:Sample2Vm}}">
 
-    <UserControl.DataContext>
-        <local:Sample2Vm />
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
 
-    <Grid>
-        <Grid.Resources>
-            <Style TargetType="{x:Type Button}">
-                <Setter Property="Padding" Value="8,4" />
-                <Setter Property="FontSize" Value="14" />
-            </Style>
-        </Grid.Resources>
-        <DockPanel LastChildFill="True">
-            <xctk:PropertyGrid DockPanel.Dock="Right" Width="250" AutoGenerateProperties="True" SelectedObject="{Binding}" />
-            <Border BorderThickness="1" BorderBrush="Blue" Margin="50">
-                <cl:ConstraintCanvas>
-                    <cl:ConstraintCanvas.ConstraintDefinitions>
-                        <cl:StackConstraint Orientation="{Binding StackOrientation}" Spacing="{Binding Spacing}">
-                            <cl:StackConstraintItem Element="{x:Reference Button1}" />
-                            <cl:StackConstraintItem Element="{x:Reference Button2}" />
-                            <cl:StackConstraintItem Element="{x:Reference Button3}" />
-                            <cl:StackConstraintItem Element="{x:Reference Button4}" />
-                            <cl:StackConstraintItem Element="{x:Reference Button5}" />
-                        </cl:StackConstraint>
-                        <cl:SimpleConstraint Element1="{x:Reference Button1}"
-                                             Property1="Left"
-                                             Constant2="0"
-                        />
-                        <cl:SimpleConstraint Element1="{x:Reference Button1}"
-                                             Property1="Top"
-                                             Constant2="0"
-                        />
-                    </cl:ConstraintCanvas.ConstraintDefinitions>
-                    <Button Name="Button1" Content="1"/>
-                    <Button Name="Button2" Content="2"/>
-                    <Button Name="Button3" Content="3"/>
-                    <Button Name="Button4" Content="4"/>
-                    <Button Name="Button5" Content="5"/>
-                </cl:ConstraintCanvas>
-            </Border>
-        </DockPanel>
-    </Grid>
+    <cl:ConstraintCanvas>
+        <cl:ConstraintCanvas.ConstraintDefinitions>
+            <cl:StackConstraint Orientation="{Binding StackOrientation}" Spacing="{Binding Spacing}">
+                <cl:StackConstraintItem Element="{x:Reference Button1}" />
+                <cl:StackConstraintItem Element="{x:Reference Button2}" />
+                <cl:StackConstraintItem Element="{x:Reference Button3}" />
+                <cl:StackConstraintItem Element="{x:Reference Button4}" />
+                <cl:StackConstraintItem Element="{x:Reference Button5}" />
+            </cl:StackConstraint>
+            <cl:SimpleConstraint Element1="{x:Reference Button1}"
+                                 Property1="Left"
+                                 Constant2="50"
+            />
+            <cl:SimpleConstraint Element1="{x:Reference Button1}"
+                                 Property1="Top"
+                                 Constant2="50"
+            />
+        </cl:ConstraintCanvas.ConstraintDefinitions>
+        <Button Name="Button1" Content="1"/>
+        <Button Name="Button2" Content="2"/>
+        <Button Name="Button3" Content="3"/>
+        <Button Name="Button4" Content="4"/>
+        <Button Name="Button5" Content="5"/>
+    </cl:ConstraintCanvas>
+
 </UserControl>

@@ -26,10 +26,14 @@ namespace ConstraintLayoutSample
         }
     }
 
-    public class Sample2Vm : NotifyPropertyChangedBase
+    public class Sample2Vm : SampleVmBase
     {
         private Orientation _stackOrientation;
         private double _spacing;
+
+        public Sample2Vm() : base(nameof(Sample2Vm))
+        {
+        }
 
         public Orientation StackOrientation
         {

@@ -26,9 +26,25 @@ namespace ConstraintLayoutSample
         }
     }
 
-    public class Sample1ViewModel : NotifyPropertyChangedBase
+    public class Sample1Vm : SampleVmBase
     {
+        private bool _useCanvasLayout;
         private int _spacing = 10;
+
+        public Sample1Vm() : base(nameof(Sample1Vm))
+        {
+        }
+
+        public bool UseCanvasLayout
+        {
+            get => _useCanvasLayout;
+            set
+            {
+                if (value == _useCanvasLayout) return;
+                _useCanvasLayout = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int Spacing
         {

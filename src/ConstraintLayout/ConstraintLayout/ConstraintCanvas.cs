@@ -160,7 +160,6 @@ namespace ConstraintLayout
             solver.AddConstraint(vars.Top + vars.Height / 2 == vars.Middle);
         }
 
-
         private static void AddCanvasConstraints(Solver solver, ElementVars vars, Size arrangeSize, UIElement child)
         {
             var leftValue = Canvas.GetLeft(child);

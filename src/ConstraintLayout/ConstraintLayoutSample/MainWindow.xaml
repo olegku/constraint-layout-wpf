@@ -4,9 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConstraintLayoutSample"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <local:Sample2/>
-    </Grid>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:Sample1Vm}">
+            <local:Sample1/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:Sample2Vm}">
+            <local:Sample2/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:MainVm />
+    </Window.DataContext>
+
+    <DockPanel>
+        <xctk:PropertyGrid 
+            Width="250" 
+            DockPanel.Dock="Right" 
+            SelectedObject="{Binding SampleVms/}" ShowSearchBox="False" ShowSortOptions="False" ShowSummary="False"/>
+        <TabControl ItemsSource="{Binding SampleVms}" IsSynchronizedWithCurrentItem="True">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Blue" BorderThickness="1" Margin="50">
+                        <ContentPresenter Content="{Binding}"/>
+                    </Border>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </DockPanel>
 </Window>

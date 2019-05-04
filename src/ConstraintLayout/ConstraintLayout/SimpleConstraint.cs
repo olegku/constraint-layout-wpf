@@ -109,7 +109,7 @@ namespace ConstraintLayout
             }
             else if (var1NotNull)
             {
-                solver.AddConstraint(new Constraint(var1 + Constant1 - Constant1, op));
+                solver.AddConstraint(new Constraint(var1 + Constant1 - Constant2, op));
             }
             else if (var2NotNull)
             {
