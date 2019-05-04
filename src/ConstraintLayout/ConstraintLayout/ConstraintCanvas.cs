@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Kiwi;
@@ -26,11 +27,11 @@ namespace ConstraintLayout
 
         public ConstraintCanvas()
         {
-            ConstraintDefinitions = new ConstraintDefinitionCollection();
+            ConstraintDefinitions = new FreezableCollection<ConstraintDefinition>();
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public ConstraintDefinitionCollection ConstraintDefinitions { get; }
+        public IList ConstraintDefinitions { get; }
 
         public bool UseCanvasLayout
         {
@@ -92,7 +93,7 @@ namespace ConstraintLayout
                 solver.AddConstraint(vars.Height == child.DesiredSize.Height);
             }
 
-            foreach (var constraintDefinition in ConstraintDefinitions)
+            foreach (ConstraintDefinition constraintDefinition in ConstraintDefinitions)
             {
                 constraintDefinition.ProvideConstraints(solver);
             }

@@ -10,11 +10,6 @@ namespace ConstraintLayout
     }
 
 
-    public class ConstraintDefinitionCollection : FreezableCollection<ConstraintDefinition>
-    {
-    }
-
-
     public class SimpleConstraint : ConstraintDefinition
     {
         public static readonly DependencyProperty Element1Property = DependencyProperty.Register(
@@ -100,6 +95,11 @@ namespace ConstraintLayout
 
         public override void ProvideConstraints(Solver solver)
         {
+            if (Element1 == null || Element2 == null)
+            {
+                return;
+            }
+
             var vars1 = ConstraintCanvas.GetElementVars(Element1);
             var vars2 = ConstraintCanvas.GetElementVars(Element2);
             if (vars1 == null || vars2 == null) return;

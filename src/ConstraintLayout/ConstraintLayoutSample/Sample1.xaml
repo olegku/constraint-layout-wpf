@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConstraintLayoutSample"
-             xmlns:constraintLayout="clr-namespace:ConstraintLayout;assembly=ConstraintLayout"
+             xmlns:cl="clr-namespace:ConstraintLayout;assembly=ConstraintLayout"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -17,12 +17,35 @@
         <DockPanel LastChildFill="True">
             <CheckBox Name="CheckBoxUseCanvasLayout" Margin="10" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="UseCanvasLayout" />
             <Border BorderThickness="1" BorderBrush="Blue">
-                <constraintLayout:ConstraintCanvas UseCanvasLayout="{Binding ElementName=CheckBoxUseCanvasLayout, Path=IsChecked}">
-                    <Button Name="ButtonTopLeft" Content="top-left" Canvas.Top="10" Canvas.Left="10"/>
-                    <Button Name="ButtonTopRight" Content="top-right" Canvas.Top="10" Canvas.Right="10" />
-                    <Button Name="ButtonBottomLeft" Content="bottom-left" Canvas.Bottom="10" Canvas.Left="10" />
-                    <Button Name="ButtonBottomRight" Content="bottom-right" Canvas.Bottom="10" Canvas.Right="10"/>
-                </constraintLayout:ConstraintCanvas>
+                <cl:ConstraintCanvas UseCanvasLayout="{Binding ElementName=CheckBoxUseCanvasLayout, Path=IsChecked}">
+                    <cl:ConstraintCanvas.ConstraintDefinitions>
+                        <cl:SimpleConstraint 
+                            Element1="{x:Reference ButtonTopRight}" Property1="Left"
+                            Element2="{x:Reference ButtonTopLeft}" Property2="Right"
+                            Constant="-10"
+                            Relation="GreaterEqual"/>
+                        <cl:SimpleConstraint 
+                            Element1="{x:Reference ButtonBottomRight}" Property1="Left"
+                            Element2="{x:Reference ButtonBottomLeft}" Property2="Right"
+                            Constant="-10"
+                            Relation="GreaterEqual"/>
+                        <cl:SimpleConstraint 
+                            Element1="{x:Reference ButtonBottomLeft}" Property1="Top"
+                            Element2="{x:Reference ButtonTopLeft}" Property2="Bottom"
+                            Constant="-10"
+                            Relation="GreaterEqual"/>
+                        <cl:SimpleConstraint 
+                            Element1="{x:Reference ButtonBottomRight}" Property1="Top"
+                            Element2="{x:Reference ButtonTopRight}" Property2="Bottom"
+                            Constant="-10"
+                            Relation="GreaterEqual"/>
+                    </cl:ConstraintCanvas.ConstraintDefinitions>
+                    <Button Name="ButtonTopLeft" Content="top-left" Canvas.Top="50" Canvas.Left="50"/>
+                    <Button Name="ButtonTopRight" Content="top-right"  Canvas.Top="50" Canvas.Right="50" />
+                    <Button Name="ButtonBottomLeft" Content="bottom-left" Canvas.Bottom="50" Canvas.Left="50" />
+                    <Button Name="ButtonBottomRight" Content="bottom-right" Height="50" Canvas.Bottom="50" Canvas.Right="50"/>
+                    <Button Name="ButtonNone" Content="none" />
+                </cl:ConstraintCanvas>
             </Border>
         </DockPanel>
     </Grid>
