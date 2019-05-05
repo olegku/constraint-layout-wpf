@@ -107,6 +107,11 @@ namespace ConstraintLayout
                 AddCommonConstraints(solver, vars, arrangeSize);
                 AddCanvasConstraints(solver, vars, arrangeSize, child);
 
+                Constraint.GetLeft(child)?.AddToSolver(solver, child, ConstraintProperty.Left);
+                Constraint.GetTop(child)?.AddToSolver(solver, child, ConstraintProperty.Top);
+                Constraint.GetRight(child)?.AddToSolver(solver, child, ConstraintProperty.Right);
+                Constraint.GetBottom(child)?.AddToSolver(solver, child, ConstraintProperty.Bottom);
+
                 // add constraints for element measured size
                 solver.AddConstraint(vars.Width == child.DesiredSize.Width);
                 solver.AddConstraint(vars.Height == child.DesiredSize.Height);

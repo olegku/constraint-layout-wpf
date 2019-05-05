@@ -8,6 +8,8 @@ namespace ConstraintLayout
 {
     public enum ConstraintProperty
     {
+        // TODO: add None
+
         Width,
         Height,
 

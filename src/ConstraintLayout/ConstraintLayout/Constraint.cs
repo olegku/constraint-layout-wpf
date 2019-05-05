@@ -6,36 +6,38 @@ namespace ConstraintLayout
     {
         public static readonly DependencyProperty LeftProperty = DependencyProperty.RegisterAttached(
             "Left", 
-            typeof(double), 
+            typeof(PropertyConstraint), 
             typeof(Constraint), 
-            new PropertyMetadata(default(double)));
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
         public static readonly DependencyProperty TopProperty = DependencyProperty.RegisterAttached(
             "Top", 
-            typeof(double), 
-            typeof(Constraint), 
-            new PropertyMetadata(default(double)));
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
+        public static readonly DependencyProperty RightProperty = DependencyProperty.RegisterAttached(
+            "Right", 
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
-        public static void SetLeft(DependencyObject element, double value)
-        {
-            element.SetValue(LeftProperty, value);
-        }
+        public static readonly DependencyProperty BottomProperty = DependencyProperty.RegisterAttached(
+            "Bottom", 
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
-        public static double GetLeft(DependencyObject element)
-        {
-            return (double) element.GetValue(LeftProperty);
-        }
+        public static PropertyConstraint GetLeft(DependencyObject element) => (PropertyConstraint) element.GetValue(LeftProperty);
+        public static void SetLeft(DependencyObject element, PropertyConstraint value) => element.SetValue(LeftProperty, value);
 
+        public static PropertyConstraint GetTop(DependencyObject element) => (PropertyConstraint) element.GetValue(TopProperty);
+        public static void SetTop(DependencyObject element, PropertyConstraint value) => element.SetValue(TopProperty, value);
 
-        public static void SetTop(DependencyObject element, double value)
-        {
-            element.SetValue(TopProperty, value);
-        }
+        public static PropertyConstraint GetRight(DependencyObject element) => (PropertyConstraint) element.GetValue(RightProperty);
+        public static void SetRight(DependencyObject element, PropertyConstraint value) => element.SetValue(RightProperty, value);
 
-        public static double GetTop(DependencyObject element)
-        {
-            return (double) element.GetValue(TopProperty);
-        }
+        public static PropertyConstraint GetBottom(DependencyObject element) => (PropertyConstraint) element.GetValue(BottomProperty);
+        public static void SetBottom(DependencyObject element, PropertyConstraint value) => element.SetValue(BottomProperty, value);
     }
 }
