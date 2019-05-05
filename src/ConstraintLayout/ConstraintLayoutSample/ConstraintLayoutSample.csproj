@@ -63,9 +63,11 @@
     <Compile Include="Sample1.xaml.cs">
       <DependentUpon>Sample1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sample1Vm.cs" />
     <Compile Include="Sample2.xaml.cs">
       <DependentUpon>Sample2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sample2Vm.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

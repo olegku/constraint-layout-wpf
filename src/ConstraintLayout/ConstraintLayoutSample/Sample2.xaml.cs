@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ConstraintLayout;
 
 namespace ConstraintLayoutSample
 {
@@ -20,41 +21,33 @@ namespace ConstraintLayoutSample
     /// </summary>
     public partial class Sample2 : UserControl
     {
+        private int _addCounter;
+
         public Sample2()
         {
             InitializeComponent();
         }
-    }
 
-    public class Sample2Vm : SampleVmBase
-    {
-        private Orientation _stackOrientation;
-        private double _spacing;
-
-        public Sample2Vm() : base(nameof(Sample2Vm))
+        private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
+            var button = new Button
+            {
+                Content = (char)('A' + _addCounter++)
+            };
+            button.Click += Button_Click;
+
+            ConstraintCanvas.Children.Add(button);
+            StackConstraint.Items.Add(new StackConstraintItem
+            {
+                Element = button
+            });
         }
 
-        public Orientation StackOrientation
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            get => _stackOrientation;
-            set
-            {
-                if (value == _stackOrientation) return;
-                _stackOrientation = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double Spacing
-        {
-            get => _spacing;
-            set
-            {
-                if (value.Equals(_spacing)) return;
-                _spacing = value;
-                OnPropertyChanged();
-            }
+            var foundItem = StackConstraint.Items.First(item =>  item.Element == sender);
+            ConstraintCanvas.Children.Remove(foundItem.Element);
+            StackConstraint.Items.Remove(foundItem);
         }
     }
 }

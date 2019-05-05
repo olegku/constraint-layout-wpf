@@ -16,24 +16,27 @@
         </Style>
     </UserControl.Resources>
 
-    <cl:ConstraintCanvas>
+    <cl:ConstraintCanvas Name="ConstraintCanvas">
         <cl:ConstraintCanvas.ConstraintDefinitions>
-            <cl:StackConstraint Orientation="{Binding StackOrientation}" Spacing="{Binding Spacing}">
+            <cl:StackConstraint x:Name="StackConstraint" Orientation="{Binding StackOrientation}" Spacing="{Binding Spacing}">
+                <cl:StackConstraintItem Element="{x:Reference ButtonAdd}" />
                 <cl:StackConstraintItem Element="{x:Reference Button1}" />
                 <cl:StackConstraintItem Element="{x:Reference Button2}" />
                 <cl:StackConstraintItem Element="{x:Reference Button3}" />
                 <cl:StackConstraintItem Element="{x:Reference Button4}" />
                 <cl:StackConstraintItem Element="{x:Reference Button5}" />
             </cl:StackConstraint>
-            <cl:SimpleConstraint Element1="{x:Reference Button1}"
+            <!--<cl:SimpleConstraint Element1="{x:Reference ButtonAdd}"
                                  Property1="Left"
                                  Constant2="50"
-            />
-            <cl:SimpleConstraint Element1="{x:Reference Button1}"
+            />-->
+            <!--<cl:SimpleConstraint Element1="{x:Reference ButtonAdd}"
                                  Property1="Top"
                                  Constant2="50"
-            />
+            />-->
         </cl:ConstraintCanvas.ConstraintDefinitions>
+        <Button Name="ButtonAdd" Content="Add" Click="ButtonAdd_OnClick"
+                cl:Constraint.Left="50" cl:Constraint.Top="50"/>
         <Button Name="Button1" Content="1"/>
         <Button Name="Button2" Content="2"/>
         <Button Name="Button3" Content="3"/>

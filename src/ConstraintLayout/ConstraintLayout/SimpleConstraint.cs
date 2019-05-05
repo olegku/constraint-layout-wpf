@@ -105,15 +105,15 @@ namespace ConstraintLayout
 
             if (var1NotNull && var2NotNull)
             {
-                solver.AddConstraint(new Constraint(var1 + Constant1 - var2 - Constant2, op));
+                solver.AddConstraint(new Kiwi.Constraint(var1 + Constant1 - var2 - Constant2, op));
             }
             else if (var1NotNull)
             {
-                solver.AddConstraint(new Constraint(var1 + Constant1 - Constant2, op));
+                solver.AddConstraint(new Kiwi.Constraint(var1 + Constant1 - Constant2, op));
             }
             else if (var2NotNull)
             {
-                solver.AddConstraint(new Constraint(Constant1 - var2 - Constant2, op));
+                solver.AddConstraint(new Kiwi.Constraint(Constant1 - var2 - Constant2, op));
             }
         }
 
