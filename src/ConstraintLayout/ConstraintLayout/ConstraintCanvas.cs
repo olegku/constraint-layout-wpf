@@ -15,9 +15,9 @@ namespace ConstraintLayout
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange));
 
         private static readonly DependencyPropertyKey ConstraintDefinitionsPropertyKey = DependencyProperty.RegisterReadOnly(
-            "ConstraintDefinitions", 
-            typeof(ConstraintDefinitionCollection), 
-            typeof(ConstraintCanvas), 
+            "ConstraintDefinitions",
+            typeof(ConstraintDefinitionCollection),
+            typeof(ConstraintCanvas),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsArrange));
         public static readonly DependencyProperty ConstraintDefinitionsProperty = ConstraintDefinitionsPropertyKey.DependencyProperty;
 
@@ -46,10 +46,7 @@ namespace ConstraintLayout
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public IList ConstraintDefinitions
-        {
-            get => (IList)GetValue(ConstraintDefinitionsProperty);
-        }
+        public IList ConstraintDefinitions => (IList)GetValue(ConstraintDefinitionsProperty);
 
         internal static ElementVars GetElementVars(DependencyObject element)
         {

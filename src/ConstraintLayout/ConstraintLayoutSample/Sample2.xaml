@@ -19,12 +19,13 @@
     <cl:ConstraintCanvas Name="ConstraintCanvas">
         <cl:ConstraintCanvas.ConstraintDefinitions>
             <cl:StackConstraint x:Name="StackConstraint" Orientation="{Binding StackOrientation}" Spacing="{Binding Spacing}">
-                <cl:StackConstraintItem Element="{x:Reference ButtonAdd}" />
-                <cl:StackConstraintItem Element="{x:Reference Button1}" />
-                <cl:StackConstraintItem Element="{x:Reference Button2}" />
-                <cl:StackConstraintItem Element="{x:Reference Button3}" />
-                <cl:StackConstraintItem Element="{x:Reference Button4}" />
-                <cl:StackConstraintItem Element="{x:Reference Button5}" />
+                <cl:StackConstraintItem Element="{Binding ElementName=ButtonAdd}" />
+                <cl:StackConstraintItem Element="{Binding ElementName=Button1}" />
+                <cl:StackConstraintItem Element="{Binding ElementName=Button2}" />
+                <cl:StackConstraintItem Element="{Binding ElementName= Button3}" />
+                <cl:StackConstraintItem Element="{Binding ElementName= Button4}" />
+                <cl:StackConstraintItem Element="{Binding ElementName= Button5}" />
+
             </cl:StackConstraint>
         </cl:ConstraintCanvas.ConstraintDefinitions>
         <Button Name="ButtonAdd" Content="Add" Click="ButtonAdd_OnClick"

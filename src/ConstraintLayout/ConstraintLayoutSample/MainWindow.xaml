@@ -22,10 +22,6 @@
     </Window.DataContext>
 
     <DockPanel>
-        <xctk:PropertyGrid 
-            Width="250" 
-            DockPanel.Dock="Right" 
-            SelectedObject="{Binding SampleVms/}" ShowSearchBox="False" ShowSortOptions="False" ShowSummary="False"/>
         <TabControl ItemsSource="{Binding SampleVms}" IsSynchronizedWithCurrentItem="True">
             <TabControl.ItemTemplate>
                 <DataTemplate>

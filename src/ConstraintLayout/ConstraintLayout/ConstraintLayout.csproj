@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Kiwi">
-      <HintPath>..\..\..\..\kiwi-net\Kiwi\Kiwi\bin\Debug\netstandard2.0\Kiwi.dll</HintPath>
+      <HintPath>..\..\..\..\kiwi-net\Kiwi\Kiwi\bin\Debug\netstandard1.6\Kiwi.dll</HintPath>
     </Reference>
     <Reference Include="MoreLinq, Version=3.1.1.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.3.1.1\lib\net451\MoreLinq.dll</HintPath>
