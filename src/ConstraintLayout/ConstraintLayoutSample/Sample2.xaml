@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConstraintLayoutSample"
-             xmlns:cl="clr-namespace:ConstraintLayout;assembly=ConstraintLayout"
+             xmlns:cl="https://github.com/olegku/constraint-layout-wpf/schemas/2020/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type local:Sample2Vm}}">
@@ -25,7 +25,6 @@
                 <cl:StackConstraintItem Element="{Binding ElementName= Button3}" />
                 <cl:StackConstraintItem Element="{Binding ElementName= Button4}" />
                 <cl:StackConstraintItem Element="{Binding ElementName= Button5}" />
-
             </cl:StackConstraint>
         </cl:ConstraintCanvas.ConstraintDefinitions>
         <Button Name="ButtonAdd" Content="Add" Click="ButtonAdd_OnClick"

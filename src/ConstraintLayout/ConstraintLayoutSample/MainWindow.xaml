@@ -15,6 +15,9 @@
         <DataTemplate DataType="{x:Type local:Sample2Vm}">
             <local:Sample2/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:Sample3Vm}">
+            <local:Sample3/>
+        </DataTemplate>
     </Window.Resources>
 
     <Window.DataContext>

@@ -2,6 +2,7 @@
 
 namespace ConstraintLayout
 {
+    // TODO: add MiddleProperty and CenterProperty
     public static class Constraint
     {
         public static readonly DependencyProperty LeftProperty = DependencyProperty.RegisterAttached(

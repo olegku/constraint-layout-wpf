@@ -55,3 +55,7 @@ using System.Xml.Linq;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+[assembly: XmlnsDefinition("https://github.com/olegku/constraint-layout-wpf/schemas/2020/xaml", "ConstraintLayout")]
+[assembly: XmlnsDefinition("https://github.com/olegku/constraint-layout-wpf/schemas/2020/xaml", "ConstraintLayout.Markup")]
+[assembly: XmlnsPrefix("https://github.com/olegku/constraint-layout-wpf/schemas/2020/xaml", "cl")]

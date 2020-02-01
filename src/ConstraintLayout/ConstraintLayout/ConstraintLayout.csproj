@@ -58,9 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constraint.cs" />
-    <Compile Include="InternalExtensions.cs" />
+    <Compile Include="Utils\InternalExtensions.cs" />
+    <Compile Include="Markup\NoLessExtension.cs" />
     <Compile Include="PropertyConstraint.cs" />
-    <Compile Include="PropertyConstraintExtension.cs" />
+    <Compile Include="PropertyConstraintConverter.cs" />
+    <Compile Include="Markup\PropertyConstraintExtension.cs" />
     <Compile Include="SimpleConstraint.cs" />
     <Compile Include="SimplePropertyConstraint.cs" />
     <Compile Include="StackConstraint.cs" />
@@ -97,6 +99,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Constraints\" />
+    <Folder Include="PropertyConstraints\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
