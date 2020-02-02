@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Data;
 
-namespace ConstraintLayout
+namespace ConstraintLayout.PropertyConstraints
 {
     public class PropertyConstraintConverter : TypeConverter
     {
@@ -38,7 +38,7 @@ namespace ConstraintLayout
                 Constant = 0,
             };
 
-            result.Relation = GetConstraintRelation(match.Groups["Rel"], result);
+            result.Relation = GetConstraintRelation(match.Groups["Rel"]);
 
             if (match.Groups["ElemProp"].Success)
             {
@@ -77,19 +77,19 @@ namespace ConstraintLayout
             return result;
         }
 
-        private static ConstraintRelation GetConstraintRelation(Group groupRel, SimplePropertyConstraint result)
+        private static ConstraintRelation GetConstraintRelation(Group matchGroup)
         {
-            if (!groupRel.Success)
+            if (!matchGroup.Success)
             {
                 return ConstraintRelation.Equal;
             }
 
-            switch (groupRel.Value)
+            switch (matchGroup.Value)
             {
                 case "==": return ConstraintRelation.Equal;
                 case "<=": return ConstraintRelation.LessEqual;
                 case ">=": return ConstraintRelation.GreaterEqual;
-                default: throw new ArgumentOutOfRangeException(nameof(groupRel.Value), groupRel.Value, null);
+                default: throw new ArgumentOutOfRangeException(nameof(matchGroup.Value), matchGroup.Value, null);
             }
         }
     }

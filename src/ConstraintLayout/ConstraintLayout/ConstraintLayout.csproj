@@ -58,25 +58,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constraint.cs" />
+    <Compile Include="ConstraintProperty.cs" />
+    <Compile Include="ConstraintRelation.cs" />
     <Compile Include="Utils\InternalExtensions.cs" />
     <Compile Include="Markup\NoLessExtension.cs" />
-    <Compile Include="PropertyConstraint.cs" />
-    <Compile Include="PropertyConstraintConverter.cs" />
+    <Compile Include="PropertyConstraints\PropertyConstraint.cs" />
+    <Compile Include="PropertyConstraints\PropertyConstraintConverter.cs" />
     <Compile Include="Markup\PropertyConstraintExtension.cs" />
-    <Compile Include="SimpleConstraint.cs" />
-    <Compile Include="SimplePropertyConstraint.cs" />
-    <Compile Include="StackConstraint.cs" />
+    <Compile Include="Constraints\SimpleConstraint.cs" />
+    <Compile Include="PropertyConstraints\SimplePropertyConstraint.cs" />
+    <Compile Include="Constraints\StackConstraint.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ConstraintCanvas.cs" />
-    <Compile Include="ConstraintDefinition.cs" />
+    <Compile Include="Constraints\ConstraintDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstraintDefinitionCollection.cs" />
+    <Compile Include="Constraints\ConstraintDefinitionCollection.cs" />
     <Compile Include="ElementVars.cs" />
-    <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -100,9 +101,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Constraints\" />
-    <Folder Include="PropertyConstraints\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

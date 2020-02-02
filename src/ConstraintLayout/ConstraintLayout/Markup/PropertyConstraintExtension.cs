@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
+using ConstraintLayout.PropertyConstraints;
 
 namespace ConstraintLayout.Markup
 {
@@ -49,10 +50,6 @@ namespace ConstraintLayout.Markup
                     ElementName = ElementName,
                     Mode = BindingMode.OneTime
                 });
-            }
-            else
-            {
-                throw new InvalidOperationException($"'{nameof(Element)}' or '{nameof(ElementName)}' must be set");
             }
 
             return constraint;

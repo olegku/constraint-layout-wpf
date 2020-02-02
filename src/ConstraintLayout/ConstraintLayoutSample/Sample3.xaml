@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConstraintLayoutSample"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:b2="clr-namespace:ConstraintLayoutSample.Behaviors"
              xmlns:cl="https://github.com/olegku/constraint-layout-wpf/schemas/2020/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -18,38 +19,55 @@
                 <Setter Property="Fill" Value="CornflowerBlue" />
                 <Setter Property="Stroke" Value="White" />
                 <Setter Property="StrokeThickness" Value="1" />
-                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Cursor" Value="Hand" />
             </Style>
         </Grid.Resources>
 
         <cl:ConstraintCanvas>
-            <Ellipse Name="C1" Canvas.Left="10" Canvas.Top="10">
-                <cl:Constraint.Left>
-                    <cl:SimplePropertyConstraint Constant="100" />
-                </cl:Constraint.Left>
+            
+            <Ellipse Name="C1" 
+                     Canvas.Left="10" 
+                     Canvas.Top="10">
                 <b:Interaction.Behaviors>
-                    <b:MouseDragElementBehavior />
+                    <b2:MouseDragHandlerBehavior />
                 </b:Interaction.Behaviors>
             </Ellipse>
-            <Ellipse Name="C2" Canvas.Left="10" Canvas.Top="200">
+            
+            <Ellipse Name="C2" 
+                     Canvas.Left="10" 
+                     Canvas.Top="200">
                 <b:Interaction.Behaviors>
-                    <b:MouseDragElementBehavior />
+                    <b2:MouseDragHandlerBehavior />
                 </b:Interaction.Behaviors>
             </Ellipse>
-            <Ellipse Name="C3" Canvas.Left="200" Canvas.Top="200" 
+            
+            <Ellipse Name="C3" 
+                     Canvas.Left="200" 
+                     Canvas.Top="200" 
                      cl:Constraint.Top=">= C2.Bottom + 0">
-                <!--<cl:Constraint.Left>
-                    <cl:NoLess ElementName="C4" Property="Right" Constant="10" />
-                </cl:Constraint.Left>-->
                 <b:Interaction.Behaviors>
-                    <b:MouseDragElementBehavior />
+                    <b2:MouseDragElementBehavior x:Name="MouseDragElementBehaviorC3" ConstrainToParentBounds="True" />
                 </b:Interaction.Behaviors>
             </Ellipse>
-            <Ellipse Name="C4" Canvas.Left="200" Canvas.Top="10" cl:Constraint.Top="20">
+
+            <TextBlock Background="White" 
+                       Padding="10,5"
+                       cl:Constraint.Left="{cl:PropertyConstraint GreaterEqual, ElementName=C3, Property=Right, Constant=10}"
+                       cl:Constraint.Top="C3.Top + 0"
+                       >
+                X=<Run Text="{Binding ElementName=MouseDragElementBehaviorC3, Path=X}" /><LineBreak/>
+                Y=<Run Text="{Binding ElementName=MouseDragElementBehaviorC3, Path=Y}" />
+            </TextBlock>
+
+            <Ellipse Name="C4" 
+                     Canvas.Left="200" 
+                     Canvas.Top="10" 
+                     cl:Constraint.Top="20">
                 <b:Interaction.Behaviors>
-                    <b:MouseDragElementBehavior />
+                    <b2:MouseDragHandlerBehavior />
                 </b:Interaction.Behaviors>
             </Ellipse>
+
         </cl:ConstraintCanvas>
 
     </Grid>

@@ -2,7 +2,7 @@
 using System.Windows;
 using Kiwi;
 
-namespace ConstraintLayout
+namespace ConstraintLayout.PropertyConstraints
 {
     [TypeConverter(typeof(PropertyConstraintConverter))]
     public abstract class PropertyConstraint : Freezable

@@ -6,7 +6,7 @@ using System.Windows.Markup;
 using Kiwi;
 using MoreLinq.Extensions;
 
-namespace ConstraintLayout
+namespace ConstraintLayout.Constraints
 {
     [ContentProperty(nameof(Items))]
     public class StackConstraint : ConstraintDefinition
@@ -54,10 +54,7 @@ namespace ConstraintLayout
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public StackConstraintItemCollection Items
-        {
-            get => (StackConstraintItemCollection)GetValue(ItemsProperty);
-        }
+        public StackConstraintItemCollection Items => (StackConstraintItemCollection)GetValue(ItemsProperty);
 
         #endregion
 

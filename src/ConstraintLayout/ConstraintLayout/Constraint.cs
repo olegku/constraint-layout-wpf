@@ -1,8 +1,8 @@
 ﻿using System.Windows;
+using ConstraintLayout.PropertyConstraints;
 
 namespace ConstraintLayout
 {
-    // TODO: add MiddleProperty and CenterProperty
     public static class Constraint
     {
         public static readonly DependencyProperty LeftProperty = DependencyProperty.RegisterAttached(
@@ -13,6 +13,18 @@ namespace ConstraintLayout
 
         public static readonly DependencyProperty TopProperty = DependencyProperty.RegisterAttached(
             "Top", 
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
+
+        public static readonly DependencyProperty CenterProperty = DependencyProperty.RegisterAttached(
+            "Center", 
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
+
+        public static readonly DependencyProperty MiddleProperty = DependencyProperty.RegisterAttached(
+            "Middle", 
             typeof(PropertyConstraint), 
             typeof(Constraint),
             new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
@@ -34,6 +46,12 @@ namespace ConstraintLayout
 
         public static PropertyConstraint GetTop(DependencyObject element) => (PropertyConstraint) element.GetValue(TopProperty);
         public static void SetTop(DependencyObject element, PropertyConstraint value) => element.SetValue(TopProperty, value);
+
+        public static void SetCenter(DependencyObject element, PropertyConstraint value) => element.SetValue(CenterProperty, value);
+        public static PropertyConstraint GetCenter(DependencyObject element) => (PropertyConstraint)element.GetValue(CenterProperty);
+
+        public static void SetMiddle(DependencyObject element, PropertyConstraint value) => element.SetValue(MiddleProperty, value);
+        public static PropertyConstraint GetMiddle(DependencyObject element) => (PropertyConstraint)element.GetValue(MiddleProperty);
 
         public static PropertyConstraint GetRight(DependencyObject element) => (PropertyConstraint) element.GetValue(RightProperty);
         public static void SetRight(DependencyObject element, PropertyConstraint value) => element.SetValue(RightProperty, value);

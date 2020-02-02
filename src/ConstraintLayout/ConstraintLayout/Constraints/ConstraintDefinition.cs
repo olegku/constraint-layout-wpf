@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ConstraintLayout
+namespace ConstraintLayout.Constraints
 {
     public abstract class ConstraintDefinition : Freezable
     {

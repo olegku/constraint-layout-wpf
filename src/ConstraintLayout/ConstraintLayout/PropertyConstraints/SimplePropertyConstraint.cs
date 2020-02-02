@@ -3,7 +3,7 @@ using System.Windows;
 using ConstraintLayout.Utils;
 using Kiwi;
 
-namespace ConstraintLayout
+namespace ConstraintLayout.PropertyConstraints
 {
     public class SimplePropertyConstraint : PropertyConstraint
     {

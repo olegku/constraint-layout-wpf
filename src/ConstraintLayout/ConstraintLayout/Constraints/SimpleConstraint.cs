@@ -3,7 +3,7 @@ using System.Windows;
 using ConstraintLayout.Utils;
 using Kiwi;
 
-namespace ConstraintLayout
+namespace ConstraintLayout.Constraints
 {
     public class SimpleConstraint : ConstraintDefinition
     {
