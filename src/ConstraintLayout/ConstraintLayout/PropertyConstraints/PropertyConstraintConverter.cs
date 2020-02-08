@@ -9,7 +9,7 @@ namespace ConstraintLayout.PropertyConstraints
     public class PropertyConstraintConverter : TypeConverter
     {
         private static readonly Regex SimpleConstraintRegex = new Regex(
-            @"^\s*(?<Rel>==|>=|<=)?\s*(?<ElemProp>(?<Elem>\w+)\s*\.\s*(?<Prop>\w+))?\s*(?<ConstSign>\+|-)?\s*(?<Const>\d*)\s*?$");
+            @"^\s*(?<Rel>==|>=|<=)?\s*(?<ElemProp>(?<Elem>\w+)\s*\.\s*(?<Prop>\w+))?\s*(?<ConstSign>\+|-)?\s*(?<Const>\d*)?\s*?$");
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {

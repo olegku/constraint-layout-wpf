@@ -58,8 +58,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviors\MouseDragHandlerBehavior.cs" />
-    <Compile Include="Behaviors\MouseDragElementBehavior.cs" />
+    <Compile Include="Behaviors\AbstractMouseDragHandlerBehavior.cs" />
+    <Compile Include="Behaviors\RenderTransformMouseDragElementBehavior.cs" />
+    <Compile Include="Behaviors\SimpleConstraintMouseDragElementBehavior.cs" />
+    <Compile Include="Controls\LayoutInfo.cs" />
+    <Compile Include="Converters\RectPointConverter.cs" />
     <Compile Include="NotifyPropertyChangedBase.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Sample1.xaml.cs">

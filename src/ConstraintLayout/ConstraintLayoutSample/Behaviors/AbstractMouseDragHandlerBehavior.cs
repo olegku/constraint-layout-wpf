@@ -5,7 +5,7 @@ using Microsoft.Xaml.Behaviors;
 
 namespace ConstraintLayoutSample.Behaviors
 {
-    public class MouseDragHandlerBehavior : Behavior<FrameworkElement>
+    public abstract class AbstractMouseDragHandlerBehavior : Behavior<FrameworkElement>
     {
         private bool _settingPosition;
         private Point _relativePosition;
@@ -15,19 +15,19 @@ namespace ConstraintLayoutSample.Behaviors
         public static readonly DependencyProperty XProperty = DependencyProperty.Register(
             "X", 
             typeof(double),
-            typeof(MouseDragHandlerBehavior),
+            typeof(AbstractMouseDragHandlerBehavior),
             new PropertyMetadata(double.NaN, OnXChanged));
 
         public static readonly DependencyProperty YProperty = DependencyProperty.Register(
             "Y", 
             typeof(double),
-            typeof(MouseDragHandlerBehavior),
+            typeof(AbstractMouseDragHandlerBehavior),
             new PropertyMetadata(double.NaN, OnYChanged));
 
         public static readonly DependencyProperty ConstrainToParentBoundsProperty = DependencyProperty.Register(
             "ConstrainToParentBounds", 
             typeof(bool), 
-            typeof(MouseDragHandlerBehavior), 
+            typeof(AbstractMouseDragHandlerBehavior), 
             new PropertyMetadata(false, OnConstrainToParentBoundsChanged));
 
         #endregion
@@ -66,19 +66,19 @@ namespace ConstraintLayoutSample.Behaviors
 
         private static void OnXChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
-            var dragBehavior = (MouseDragHandlerBehavior)sender;
+            var dragBehavior = (AbstractMouseDragHandlerBehavior)sender;
             dragBehavior.UpdatePosition(new Point((double)args.NewValue, dragBehavior.Y));
         }
 
         private static void OnYChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
-            var dragBehavior = (MouseDragHandlerBehavior)sender;
+            var dragBehavior = (AbstractMouseDragHandlerBehavior)sender;
             dragBehavior.UpdatePosition(new Point(dragBehavior.X, (double)args.NewValue));
         }
 
         private static void OnConstrainToParentBoundsChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
-            var dragBehavior = (MouseDragHandlerBehavior)sender;
+            var dragBehavior = (AbstractMouseDragHandlerBehavior)sender;
             dragBehavior.UpdatePosition(new Point(dragBehavior.X, dragBehavior.Y));
         }
 
@@ -109,10 +109,7 @@ namespace ConstraintLayoutSample.Behaviors
             }
         }
 
-        protected virtual void ApplyTranslation(double x, double y)
-        {
-        }
-
+        protected abstract void ApplyTranslation(double x, double y);
 
         private void UpdatePosition()
         {
@@ -121,8 +118,6 @@ namespace ConstraintLayoutSample.Behaviors
             X = translation.X;
             Y = translation.Y;
         }
-
-
 
         protected override void OnAttached()
         {
@@ -158,14 +153,11 @@ namespace ConstraintLayoutSample.Behaviors
             OnDrag(e);
         }
 
-
         private void OnLostMouseCapture(object sender, MouseEventArgs e)
         {
             EndDrag();
             OnDragEnded(e);
         }
-
-
 
         private void OnDragStarted(MouseButtonEventArgs e)
         {
@@ -181,9 +173,6 @@ namespace ConstraintLayoutSample.Behaviors
         {
             DragEnded?.Invoke(this, e);
         }
-
-
-
 
         internal void StartDrag(Point positionInElementCoordinates)
         {
@@ -221,9 +210,6 @@ namespace ConstraintLayoutSample.Behaviors
                 UIElement.MouseLeftButtonUpEvent,
                 new MouseButtonEventHandler(OnMouseLeftButtonUp));
         }
-
-
-
         
         private static Point GetTransformOffset(GeneralTransform transform)
         {

@@ -107,12 +107,30 @@ namespace ConstraintLayout
 
                 Constraint.GetLeft(child)?.AddToSolver(solver, child, ConstraintProperty.Left);
                 Constraint.GetTop(child)?.AddToSolver(solver, child, ConstraintProperty.Top);
+                Constraint.GetCenter(child)?.AddToSolver(solver, child, ConstraintProperty.Center);
+                Constraint.GetMiddle(child)?.AddToSolver(solver, child, ConstraintProperty.Middle);
                 Constraint.GetRight(child)?.AddToSolver(solver, child, ConstraintProperty.Right);
                 Constraint.GetBottom(child)?.AddToSolver(solver, child, ConstraintProperty.Bottom);
 
-                // add constraints for element measured size
-                solver.AddConstraint(vars.Width == child.DesiredSize.Width);
-                solver.AddConstraint(vars.Height == child.DesiredSize.Height);
+                var widthConstraint = Constraint.GetWidth(child);
+                if (widthConstraint != null)
+                {
+                    widthConstraint.AddToSolver(solver, child, ConstraintProperty.Width);
+                }
+                else
+                {
+                    solver.AddConstraint(vars.Width == child.DesiredSize.Width);
+                }
+
+                var heightConstraint = Constraint.GetHeight(child);
+                if (heightConstraint != null)
+                {
+                    heightConstraint.AddToSolver(solver, child, ConstraintProperty.Height);
+                }
+                else
+                {
+                    solver.AddConstraint(vars.Height == child.DesiredSize.Height);
+                }
             }
 
             foreach (ConstraintDefinition constraintDefinition in ConstraintDefinitions)
@@ -153,8 +171,8 @@ namespace ConstraintLayout
             solver.AddConstraint(vars.Bottom <= arrangeSize.Height | Strength.Weak);
 
             // strong constraints to make width and height non-negative
-            solver.AddConstraint(vars.Width >= 0);
-            solver.AddConstraint(vars.Height >= 0);
+            solver.AddConstraint(vars.Width >= 0 | Strength.Strong);
+            solver.AddConstraint(vars.Height >= 0 | Strength.Strong);
 
             // strong constraints to set relations for width/left/center/right and height/top/middle/bottom
             solver.AddConstraint(vars.Left + vars.Width == vars.Right);

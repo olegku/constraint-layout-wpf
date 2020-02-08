@@ -2,7 +2,7 @@
 {
     public enum ConstraintProperty
     {
-        // TODO: add None
+        None,
 
         Width,
         Height,

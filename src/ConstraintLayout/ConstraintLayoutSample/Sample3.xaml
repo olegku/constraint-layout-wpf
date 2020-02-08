@@ -1,72 +1,171 @@
 ﻿<UserControl x:Class="ConstraintLayoutSample.Sample3"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ConstraintLayoutSample"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:b2="clr-namespace:ConstraintLayoutSample.Behaviors"
              xmlns:cl="https://github.com/olegku/constraint-layout-wpf/schemas/2020/xaml"
-             mc:Ignorable="d" 
+             xmlns:controls="clr-namespace:ConstraintLayoutSample.Controls"
+             xmlns:converters="clr-namespace:ConstraintLayoutSample.Converters"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance local:Sample3Vm, IsDesignTimeCreatable=True}">
     <Grid>
 
         <Grid.Resources>
-            <Style TargetType="{x:Type Ellipse}">
-                <Setter Property="Width" Value="30" />
-                <Setter Property="Height" Value="30" />
-                <Setter Property="Fill" Value="CornflowerBlue" />
-                <Setter Property="Stroke" Value="White" />
-                <Setter Property="StrokeThickness" Value="1" />
+            <Style x:Key="Marker" TargetType="{x:Type Control}">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+                <Setter Property="controls:LayoutInfo.TrackLayoutSlot" Value="True" />
+                <Setter Property="Background" Value="CornflowerBlue" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Control}">
+                            <Rectangle Fill="{TemplateBinding Background}"
+                                       Margin="-1"
+                                       Stroke="White"
+                                       StrokeThickness="1" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="DraggableMarker" BasedOn="{StaticResource Marker}" TargetType="{x:Type Control}">
+                <Setter Property="Width" Value="20" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Background" Value="DarkOrange" />
                 <Setter Property="Cursor" Value="Hand" />
             </Style>
+            <converters:RectPointConverter x:Key="GetMidPoint" RelativePosition="0.5,0.5" />
         </Grid.Resources>
 
-        <cl:ConstraintCanvas>
-            
-            <Ellipse Name="C1" 
-                     Canvas.Left="10" 
-                     Canvas.Top="10">
-                <b:Interaction.Behaviors>
-                    <b2:MouseDragHandlerBehavior />
-                </b:Interaction.Behaviors>
-            </Ellipse>
-            
-            <Ellipse Name="C2" 
-                     Canvas.Left="10" 
-                     Canvas.Top="200">
-                <b:Interaction.Behaviors>
-                    <b2:MouseDragHandlerBehavior />
-                </b:Interaction.Behaviors>
-            </Ellipse>
-            
-            <Ellipse Name="C3" 
-                     Canvas.Left="200" 
-                     Canvas.Top="200" 
-                     cl:Constraint.Top=">= C2.Bottom + 0">
-                <b:Interaction.Behaviors>
-                    <b2:MouseDragElementBehavior x:Name="MouseDragElementBehaviorC3" ConstrainToParentBounds="True" />
-                </b:Interaction.Behaviors>
-            </Ellipse>
+        <Path Stroke="DarkOrange" StrokeThickness="1">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="{Binding ElementName=C1, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}"
+                                IsClosed="True">
+                        <LineSegment Point="{Binding ElementName=C2, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" />
+                        <LineSegment Point="{Binding ElementName=C3, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" />
+                        <LineSegment Point="{Binding ElementName=C4, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
 
-            <TextBlock Background="White" 
-                       Padding="10,5"
-                       cl:Constraint.Left="{cl:PropertyConstraint GreaterEqual, ElementName=C3, Property=Right, Constant=10}"
-                       cl:Constraint.Top="C3.Top + 0"
-                       >
-                X=<Run Text="{Binding ElementName=MouseDragElementBehaviorC3, Path=X}" /><LineBreak/>
-                Y=<Run Text="{Binding ElementName=MouseDragElementBehaviorC3, Path=Y}" />
-            </TextBlock>
+        <Path Stroke="CornflowerBlue" StrokeThickness="1">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="{Binding ElementName=M1, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" 
+                                IsClosed="True">
+                        <LineSegment Point="{Binding ElementName=M2, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" />
+                        <LineSegment Point="{Binding ElementName=M3, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" />
+                        <LineSegment Point="{Binding ElementName=M4, Path=(controls:LayoutInfo.LayoutSlot), Converter={StaticResource GetMidPoint}}" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
 
-            <Ellipse Name="C4" 
-                     Canvas.Left="200" 
-                     Canvas.Top="10" 
-                     cl:Constraint.Top="20">
+        <cl:ConstraintCanvas SnapsToDevicePixels="True">
+
+            <cl:ConstraintCanvas.ConstraintDefinitions>
+                <cl:SimpleConstraint Element1="{Binding ElementName=C1}" Property1="Bottom" Constant1="14"
+                                     Relation="LessEqual"
+                                     Element2="{Binding ElementName=C4}" Property2="Top" />
+            </cl:ConstraintCanvas.ConstraintDefinitions>
+
+            <Control x:Name="C1"
+                     Style="{StaticResource DraggableMarker}"
+                     cl:Constraint.Left="10"
+                     cl:Constraint.Top="10">
                 <b:Interaction.Behaviors>
-                    <b2:MouseDragHandlerBehavior />
+                    <b2:SimpleConstraintMouseDragElementBehavior
+                        XConstraint="{Binding ElementName=C1, Path=(cl:Constraint.Left)}"
+                        YConstraint="{Binding ElementName=C1, Path=(cl:Constraint.Top)}" />
                 </b:Interaction.Behaviors>
-            </Ellipse>
+            </Control>
+
+            <Control x:Name="C2"
+                     Style="{StaticResource DraggableMarker}"
+                     cl:Constraint.Left="200"
+                     cl:Constraint.Top="10">
+                <b:Interaction.Behaviors>
+                    <b2:SimpleConstraintMouseDragElementBehavior
+                        XConstraint="{Binding ElementName=C2, Path=(cl:Constraint.Left)}"
+                        YConstraint="{Binding ElementName=C2, Path=(cl:Constraint.Top)}" />
+                </b:Interaction.Behaviors>
+            </Control>
+
+            <Control x:Name="C3"
+                     Style="{StaticResource DraggableMarker}"
+                     cl:Constraint.Left="200"
+                     cl:Constraint.Top="200">
+                <b:Interaction.Behaviors>
+                    <b2:SimpleConstraintMouseDragElementBehavior
+                        XConstraint="{Binding ElementName=C3, Path=(cl:Constraint.Left)}"
+                        YConstraint="{Binding ElementName=C3, Path=(cl:Constraint.Top)}" />
+                </b:Interaction.Behaviors>
+            </Control>
+
+            <Control x:Name="C4"
+                     Style="{StaticResource DraggableMarker}"
+                     cl:Constraint.Left="10"
+                     cl:Constraint.Top="200">
+                <b:Interaction.Behaviors>
+                    <b2:SimpleConstraintMouseDragElementBehavior
+                        XConstraint="{Binding ElementName=C4, Path=(cl:Constraint.Left)}"
+                        YConstraint="{Binding ElementName=C4, Path=(cl:Constraint.Top)}" />
+                </b:Interaction.Behaviors>
+
+            </Control>
+
+            <Control x:Name="M1"
+                     Style="{StaticResource Marker}">
+                <cl:Constraint.Center>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C1}" FromProperty="Center"
+                                               ToElement="{Binding ElementName=C2}" ToProperty="Center" />
+                </cl:Constraint.Center>
+                <cl:Constraint.Middle>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C1}" FromProperty="Middle"
+                                               ToElement="{Binding ElementName=C2}" ToProperty="Middle" />
+                </cl:Constraint.Middle>
+            </Control>
+
+            <Control x:Name="M2"
+                     Style="{StaticResource Marker}">
+                <cl:Constraint.Center>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C2}" FromProperty="Center"
+                                               ToElement="{Binding ElementName=C3}" ToProperty="Center" />
+                </cl:Constraint.Center>
+                <cl:Constraint.Middle>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C2}" FromProperty="Middle"
+                                               ToElement="{Binding ElementName=C3}" ToProperty="Middle" />
+                </cl:Constraint.Middle>
+            </Control>
+
+            <Control x:Name="M3"
+                     Style="{StaticResource Marker}">
+                <cl:Constraint.Center>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C3}" FromProperty="Center"
+                                               ToElement="{Binding ElementName=C4}" ToProperty="Center" />
+                </cl:Constraint.Center>
+                <cl:Constraint.Middle>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C3}" FromProperty="Middle"
+                                               ToElement="{Binding ElementName=C4}" ToProperty="Middle" />
+                </cl:Constraint.Middle>
+            </Control>
+
+            <Control x:Name="M4"
+                     Style="{StaticResource Marker}">
+                <cl:Constraint.Center>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C4}" FromProperty="Center"
+                                               ToElement="{Binding ElementName=C1}" ToProperty="Center" />
+                </cl:Constraint.Center>
+                <cl:Constraint.Middle>
+                    <cl:LerpPropertyConstraint FromElement="{Binding ElementName=C4}" FromProperty="Middle"
+                                               ToElement="{Binding ElementName=C1}" ToProperty="Middle" />
+                </cl:Constraint.Middle>
+            </Control>
 
         </cl:ConstraintCanvas>
 

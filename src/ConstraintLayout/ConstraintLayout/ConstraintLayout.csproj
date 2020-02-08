@@ -60,6 +60,7 @@
     <Compile Include="Constraint.cs" />
     <Compile Include="ConstraintProperty.cs" />
     <Compile Include="ConstraintRelation.cs" />
+    <Compile Include="PropertyConstraints\LerpPropertyConstraint.cs" />
     <Compile Include="Utils\InternalExtensions.cs" />
     <Compile Include="Markup\NoLessExtension.cs" />
     <Compile Include="PropertyConstraints\PropertyConstraint.cs" />

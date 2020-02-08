@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace ConstraintLayoutSample.Behaviors
 {
-    public class MouseDragElementBehavior : MouseDragHandlerBehavior
+    public class RenderTransformMouseDragElementBehavior : AbstractMouseDragHandlerBehavior
     {
         private Transform _cachedRenderTransform;
 
@@ -21,17 +21,10 @@ namespace ConstraintLayoutSample.Behaviors
             }
         }
 
-        private FrameworkElement ParentElement => AssociatedObject.Parent as FrameworkElement;
-
-        //private Point ActualPosition
-        //{
-        //    get
-        //    {
-        //        GeneralTransform elementToRoot = AssociatedObject.TransformToVisual(RootElement);
-        //        Point translation = GetTransformOffset(elementToRoot);
-        //        return new Point(translation.X, translation.Y);
-        //    }
-        //}
+        private FrameworkElement ParentElement
+        {
+            get { return AssociatedObject.Parent as FrameworkElement; }
+        }
 
         private Transform RenderTransform
         {

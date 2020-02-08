@@ -41,6 +41,19 @@ namespace ConstraintLayout
             typeof(Constraint),
             new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
+        public static readonly DependencyProperty WidthProperty = DependencyProperty.RegisterAttached(
+            "Width", 
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
+
+        public static readonly DependencyProperty HeightProperty = DependencyProperty.RegisterAttached(
+            "Height", 
+            typeof(PropertyConstraint), 
+            typeof(Constraint),
+            new FrameworkPropertyMetadata(default(PropertyConstraint), FrameworkPropertyMetadataOptions.AffectsParentArrange));
+
+
         public static PropertyConstraint GetLeft(DependencyObject element) => (PropertyConstraint) element.GetValue(LeftProperty);
         public static void SetLeft(DependencyObject element, PropertyConstraint value) => element.SetValue(LeftProperty, value);
 
@@ -58,5 +71,11 @@ namespace ConstraintLayout
 
         public static PropertyConstraint GetBottom(DependencyObject element) => (PropertyConstraint) element.GetValue(BottomProperty);
         public static void SetBottom(DependencyObject element, PropertyConstraint value) => element.SetValue(BottomProperty, value);
+
+        public static void SetWidth(DependencyObject element, PropertyConstraint value) => element.SetValue(WidthProperty, value);
+        public static PropertyConstraint GetWidth(DependencyObject element) => (PropertyConstraint)element.GetValue(WidthProperty);
+
+        public static void SetHeight(DependencyObject element, PropertyConstraint value) => element.SetValue(HeightProperty, value);
+        public static PropertyConstraint GetHeight(DependencyObject element) => (PropertyConstraint)element.GetValue(HeightProperty);
     }
 }

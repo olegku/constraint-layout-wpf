@@ -39,6 +39,7 @@ namespace ConstraintLayout
             {
                 switch (property)
                 {
+                    case ConstraintProperty.None: goto default;
                     case ConstraintProperty.Width: return Width;
                     case ConstraintProperty.Height: return Height;
                     case ConstraintProperty.Left: return Left;
